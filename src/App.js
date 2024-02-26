@@ -1,22 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Trivia from './Trivia';
+import Ruleta from './Ruleta';
+import logo from './images/logo.png';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'trivia':
+        return <Trivia />;
+      case 'ruleta':
+        return <Ruleta />;
+      default:
+        return (
+          <div className="App-home">
+            <img src={logo} className="App-logo" alt="logo" />
+            <div>
+              <button className='Trivia' onClick={() => setCurrentPage('trivia')}>TRIVIA</button>
+              <button className='Ruleta' onClick={() => setCurrentPage('ruleta')}>RULETA</button>
+            </div>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {renderPage()}
       </header>
     </div>
   );
